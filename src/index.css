@@ -1,0 +1,23 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+*/
+
+/* Roboto Mono font */
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
+
+/* global styles */
+body {
+  font-family: "Roboto Mono", monospace;
+  font-size: 16px;
+  line-height: 1.5;
+  /*background-color: #f7dc6f;*/
+  color: #121212;
+  margin: 0;
+  padding: 0;
+}
