@@ -75,7 +75,7 @@ The project is built with a component-based architecture using React. The main c
 
 ## Contributing
 
-Contributions are welcome! To contribute to this project, please follow these guidelines:
+To contribute to this project, please follow these guidelines:
 
 1. **Fork the repository** and create a new branch for your feature or bug fix.
 2. **Make your changes**, ensuring you follow the project's coding style and conventions.
