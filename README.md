@@ -1,4 +1,4 @@
-# FSD-MVP-W-SIHARA
+# fsd-mvp-w-sihara
 
 Welcome to the spotifysearchapp! This full-stack application allows users to search for artists and view their albums using the Spotify Web API.
 
