@@ -1,4 +1,4 @@
-# FSD-MVP-W-SIHARA
+# fsd-mvp-w-sihara
 
 Welcome to the spotifysearchapp! This full-stack application allows users to search for artists and view their albums using the Spotify Web API.
 
@@ -73,14 +73,6 @@ The project is built with a component-based architecture using React. The main c
 - **Expand Search Capabilities:** Include more detailed search filters.
 - **Improve UI/UX:** Refine the design and user experience.
 
-## Contributing
-
-Contributions are welcome! To contribute to this project, please follow these guidelines:
-
-1. **Fork the repository** and create a new branch for your feature or bug fix.
-2. **Make your changes**, ensuring you follow the project's coding style and conventions.
-3. **Commit your changes** with a descriptive commit message.
-4. **Push your branch** to your forked repository and open a pull request to the main repository.
-
 ___
+
 _CodeOp Full-Stack Web Development MVP Project 2024_
