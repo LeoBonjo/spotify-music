@@ -7,10 +7,12 @@ const AboutPage = () => {
             <div className="p-8 w-full max-w-4xl">
 
                 {/* heading for the presentation */}
-                <h1 className="text-2xl font-bold mb-4 text-center">Project Presentation</h1>
-                <p className="text-base mb-6 text-center">
-                    Welcome to the presentation of my project! This overview will cover the project&apos;s purpose, key features, technologies used, and the overall architecture.
-                </p>
+                <div className="p-4 mb-6">
+                    <h1 className="text-2xl font-bold mb-4">Project Presentation</h1>
+                    <p className="text-base mb-6">
+                        Welcome to the presentation of my project! This overview will cover the project&apos;s purpose, key features, technologies used, and the overall architecture.
+                    </p>
+                </div>
 
                 {/* introduction */}
                 <div className="p-4 mb-6">
