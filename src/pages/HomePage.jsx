@@ -32,8 +32,9 @@ const HomePage = () => {
 
   const searchFieldFilter = async (e) => {
     e.preventDefault();
+    // The GET queries a different url depending on whether the category is set to playlist
     const defaultUrl = `https://api.spotify.com/v1/search?q=${searchInput}&type=${category}`;
-    const playlistUrl = `https://api.spotify.com/v1/browse/categories/${searchInput}/${category}`;
+    const playlistUrl = `https://api.spotify.com/v1/browse/categories/${searchInput}/playlists`;
     let url = category === "playlist" ? playlistUrl : defaultUrl;
     try {
       console.log("hello");
@@ -44,22 +45,13 @@ const HomePage = () => {
           Authorization: `Bearer ${accessToken}`,
         },
       };
+      //Initialize variables to hold (abstract) the filterID and secondUrl
       let filterID;
       let secondUrl;
-      await fetch(
-        url,
-        // // THIS URL CAN RETURN FROM ARTIST, ALBUM, TRACK CATEGORIES:`https://api.spotify.com/v1/search?q=${searchInput}&type=${category}`,
-        // // THIS URL CAN RETURN FROM PLAYLIST:`https://api.spotify.com/v1/browse/categories/${searchInput}/${category}`,
-        // Have one default URL and IF the category is playlist, use the different one
-        // parameters for the search request,
-        searchParams
-      )
+      await fetch(url, searchParams)
         // convert the response to JSON
         .then((response) => response.json())
-        // TO RETURN ALBUMS FROM ARTIST CATEGORY: .then((data) => data.artists.items[0]?.id)
-        // TO RETURN TRACKS FROM ALBUM CATEGORY: .then((data) => data.albums.items[0].id)
-        // TO RETURN PLAYLISTS FROM PLAYLIST CATEGORY:.then((data) => data)
-        // TO RETURN TRACK FROM TRACK CATEGORY: .then((data) => data.tracks.items[0].id)
+        //There are multiple secondUrl and filterID values depending on which category the user searches
         .then((data) => {
           console.log(data);
           if (category === "album") {
@@ -73,9 +65,7 @@ const HomePage = () => {
             secondUrl = `https://api.spotify.com/v1/tracks/${filterID}/`;
           } else if (category === "playlist") {
             console.log(data);
-            setResults(data.playlists.items); // make sure that's the object that you're looking for
-            return;
-            // set results and return to the function
+            return setResults(data.playlists.items); // make sure that's the object that you're looking for
           }
         })
         .catch((error) => {
@@ -87,20 +77,18 @@ const HomePage = () => {
         return;
       }
       console.log("HERE?");
-      await fetch(
-        // URL FETCH ALBUMS FROM ARTIST CATEGORY: `https://api.spotify.com/v1/artists/${filterID}/albums?include_groups=album&market=US&limit=50`,
-        // URL FETCH TRACKS FROM ALBUM CATEGORY: `https://api.spotify.com/v1/albums/${filterID}/tracks`
-        // URL FETCH PLAYLISTS FROM PLAYLISTS CATEGORY (DUPLICATE OF ABOVE): `https://api.spotify.com/v1/browse/categories/${searchInput}/playlists`
-        // URL FETCH TRACK FROM TRACK CATEGORY: `https://api.spotify.com/v1/tracks/${filterID}/`,
-        secondUrl,
-        searchParams
-      )
+      // pass secondUrl and searchParams as props to the fetch
+      await fetch(secondUrl, searchParams)
         .then((response) => response.json())
-        // TO RETURN ALBUMS FROM CATEGORY ARTIST: .then((data) => setResults(data.items))
-        // TO RETURN TRACKS FROM CATEGORY ALBUM: .then((data) => setResults(data.items))
-        // TO RETURN PLAYLISTS FROM CATEGORY PLAYLIST: .then((data) => setResults(data.playlists.items))
-        .then((data) => setResults(data.items))
-
+        // If category type is TRACK .then((data) => setResults(data))
+        // Else category type is .then((data) => setResults(data.items))
+        .then((data) => {
+          if (category === "track") {
+            setResults(data);
+          } else if (category === "artist" || "album" || "playlist") {
+            setResults(data.items);
+          }
+        })
         .catch((error) => console.error("Error fetching request:", error));
     } catch (error) {
       console.error("Error in searchFieldFilter function:", error);
@@ -119,7 +107,9 @@ const HomePage = () => {
               <span className="text-green-500">spotify</span>searchapp.
             </h1>
             {/* paragraph */}
-            <p className="text-xl md:3xl mx-6">Pass time with good vibes...</p>
+            <p className="text-xl md:3xl mx-6">
+              Pass the time with good vibes...
+            </p>
           </div>
 
           {/* SearchBar */}

@@ -26,7 +26,7 @@ const SearchBar = ({
           <option value="artist">Artist</option>
           <option value="track">Track</option>
           <option value="album">Album</option>
-          <option value="playlists">Playlists</option>
+          <option value="playlist">Playlists</option>
         </select>
 
         {/* input field for user to type in search query */}

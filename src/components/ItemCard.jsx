@@ -15,7 +15,7 @@ const ItemCard = ({ result, category }) => {
     } else if (category === "playlist") {
       return (
         <img
-          src={result.album.images[0].url}
+          src={result.images[0].url}
           alt={result.name}
           className="w-full h-full object-cover"
         />
