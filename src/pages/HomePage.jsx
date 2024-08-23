@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import SearchBar from "../components/SearchBar";
 import CardGrid from "../components/CardGrid";
+import MusicPlayer from "../components/MusicPlayer";
 
 // define the client ID and client secret for Spotify API access
 const CLIENT_ID = "0d51003d15da4d759730b49c86a4eb83";
@@ -123,7 +124,10 @@ const HomePage = () => {
               setCategory={setCategory}
             />
           </div>
-
+          {/* MusicPlayer */}
+          <div>
+            <MusicPlayer accessToken={accessToken} />
+          </div>
           {/* CardGrid */}
           {results && (
             <div className="my-10 mx-12">

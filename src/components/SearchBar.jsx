@@ -34,7 +34,7 @@ const SearchBar = ({
           // input type is text
           type="text"
           // placeholder text in the input field
-          placeholder="What's on your mind?"
+          placeholder="What do you want to hear?"
           // set the input field value from the searchInput prop
           value={searchInput}
           // update searchInput state when input changes
