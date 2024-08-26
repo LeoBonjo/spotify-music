@@ -14,7 +14,7 @@ const SearchBar = ({
       {/* // container for the search bar with styling */}
       <form
         id="search-form"
-        className="flex items-center bg-white border-2 border-black rounded-lg p-2 w-4/5 mx-auto"
+        className="flex  items-center bg-white border-2 border-black rounded-lg p-2 w-4/5 mx-auto"
       >
         <select
           name="filters-dropdown"
@@ -47,7 +47,7 @@ const SearchBar = ({
             }
           }}
           // styling for the input field
-          className="p-3 w-full"
+          className="p-3 ml-2 mr-2 w-full"
         />
         {/* because it's a FORM element, you have to pass the event as an argument and preventDefault in the function */}
         <button type="submit" onClick={(e) => searchFieldFilter(e)}>

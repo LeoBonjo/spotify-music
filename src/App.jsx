@@ -40,24 +40,14 @@ const App = () => {
     //getToken();
   }, []);
   return (
-    <>
-      <WebPlayback
-        token="BQCEqVzYH2gGuE7iPWYHWVfpl828Iz2Hkbwm3fe9VUHghRal01DG8GIhlZILmVIN3AYReyAIr81ULsCJjB4AAUc0M8A2NM3C-4mXmCuFTitXiblerhkdmfdjcg1L-xlx_-PHVUb5zUB3sCBmMkMd0LyBNjLa98vdPgiEXNDDSMnGmNWvYnb831o0vtvEV--yyioaxZdMdhugZSONkaE
-"
-      />
-    </>
-    // <>{token === "" ? <Login /> : <WebPlayback token={token} />}</>
-    // <Routes>
-    //   {/* Replaced <Layout/> with the token stuff in the first Route tag */}
-    //   <Route
-    //     path="/"
-    //     element={token === "" ? <Login /> : <WebPlayback token={token} />}
-    //   >
-    //     <Route path="/home" element={<HomePage />} />
-    //     <Route path="about" element={<AboutPage />} />
-    //     <Route path="docs" element={<DocsPage />} />
-    //   </Route>
-    // </Routes>
+    <Routes>
+      {/* Replaced <Layout/> with the token stuff in the first Route tag */}
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route path="about" element={<AboutPage />} />
+        <Route path="docs" element={<DocsPage />} />
+      </Route>
+    </Routes>
   );
 };
 

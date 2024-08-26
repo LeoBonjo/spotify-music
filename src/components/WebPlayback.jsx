@@ -15,7 +15,6 @@ function WebPlayback(props) {
   const [current_track, setTrack] = useState(track);
 
   useEffect(() => {
-    console.log("webplayback??");
     const script = document.createElement("script");
     script.src = "https://sdk.scdn.co/spotify-player.js";
     script.async = true;
@@ -58,13 +57,68 @@ function WebPlayback(props) {
     };
   }, []);
 
-  return (
-    <>
-      <div className="container">
-        <div className="main-wrapper">HI THERE </div>
-      </div>
-    </>
-  );
+  if (!is_active) {
+    return (
+      <>
+        <div className="container">
+          <div className="main-wrapper">
+            <b>
+              {" "}
+              Instance not active. Transfer your playback using your Spotify app{" "}
+            </b>
+          </div>
+        </div>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <div className="container">
+          <div className="main-wrapper">
+            <img
+              src={current_track.album.images[0].url}
+              className="now-playing__cover"
+              alt=""
+            />
+
+            <div className="now-playing__side">
+              <div className="now-playing__name">{current_track.name}</div>
+              <div className="now-playing__artist">
+                {current_track.artists[0].name}
+              </div>
+
+              <button
+                className="btn-spotify"
+                onClick={() => {
+                  player.previousTrack();
+                }}
+              >
+                &lt;&lt;
+              </button>
+
+              <button
+                className="btn-spotify"
+                onClick={() => {
+                  player.togglePlay();
+                }}
+              >
+                {is_paused ? "PLAY" : "PAUSE"}
+              </button>
+
+              <button
+                className="btn-spotify"
+                onClick={() => {
+                  player.nextTrack();
+                }}
+              >
+                &gt;&gt;
+              </button>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
 }
 
 export default WebPlayback;

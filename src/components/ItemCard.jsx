@@ -1,6 +1,4 @@
 const ItemCard = ({ result, category }) => {
-  console.log(category);
-
   const renderPTag = () => {
     if (category === "playlist") {
       return result.description;

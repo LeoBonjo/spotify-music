@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import SearchBar from "../components/SearchBar";
 import CardGrid from "../components/CardGrid";
-import MusicPlayer from "../components/MusicPlayer";
-
+import WebPlayback from "../components/WebPlayback";
 // define the client ID and client secret for Spotify API access
 const CLIENT_ID = "0d51003d15da4d759730b49c86a4eb83";
 const CLIENT_SECRET = "721d7765301746ed9663b04375ae2c72";
@@ -112,7 +111,14 @@ const HomePage = () => {
               Pass the time with good vibes...
             </p>
           </div>
+          {/* MusicPlayer */}
+          <div>
+            <WebPlayback
+              token="BQAbzobwlz4JyoAvmf9z421N0eBhrWtAKvokAg5fyjz46yb3wjVWcKkczNklwPkSY7sW9qZ_Qmsisc-dQcONDrsAuNb0WhEk0sH-V6pRxuNr-iY_wD172wkHoZ0oWoOI1IMtdnYfcgJcbMOp7LVevtfTmenKFfj9-e5yXulDZwZXPGnlnoJnil9RYdpum1hTF9CFj1krYn9Q19lP4tg
 
+"
+            />
+          </div>
           {/* SearchBar */}
           <div className="my-5">
             <SearchBar
@@ -124,10 +130,7 @@ const HomePage = () => {
               setCategory={setCategory}
             />
           </div>
-          {/* MusicPlayer */}
-          <div>
-            <MusicPlayer accessToken={accessToken} />
-          </div>
+
           {/* CardGrid */}
           {results && (
             <div className="my-10 mx-12">
