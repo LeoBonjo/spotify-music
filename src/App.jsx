@@ -24,7 +24,9 @@ const Layout = () => {
 };
 
 const App = () => {
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(
+    "BQAtiLIHQKa39SiO6sc5kOPoLOWR05EU3rKMSqdmVlChvFts-o7IcMmXEURLm6atwvZHF0Ta1n8L6E-ZmAUrkDnt9lMHXPYk4Y9oFBnAu-I3u6IvvBXja9lTEtzBiGMLQ4P4MIwktigXGyqgC0BKtrKWpx5IfkhuUIZWwS332HmPIkViFbkXUBgdpfd-zmWjYmoLSeg6seXdiGbSwh6uN47GBux39T-vqd-6cMvxLYlKPDmXX2dI-hPsegIdeUoPiL1fMKNRccBasxAhbtsF-w60INGIjKx_IXoYtaSRuoZLUmI3COcMBtxDqNXEjtWmT9bBPDFb-PH58Q"
+  );
 
   useEffect(() => {
     console.log("hello");
@@ -37,7 +39,7 @@ const App = () => {
       console.log(json.access_token);
     }
 
-    //getToken();
+    getToken();
   }, []);
   return (
     <Routes>

@@ -11,8 +11,7 @@ const HomePage = () => {
   const [accessToken, setAccessToken] = useState("");
   const [results, setResults] = useState(null);
   const [category, setCategory] = useState("");
-  // pass the setter as prop to the searchBar and allow the searchbar to set the state for you
-  // map out the response of all the different categories you are querying and how the objs are structured
+  const [design, setDesign] = useState("");
 
   // For the future, in the player, if there's an option to play the entire album or just the track
 
@@ -32,12 +31,15 @@ const HomePage = () => {
 
   const searchFieldFilter = async (e) => {
     e.preventDefault();
+    // Everything is searching if we have results; set results to NULL initially
+    // So that React doesn't render the track card when you change to a different category
+    // Instead it waits to see if it should render ItemCard or TrackCard
+    setResults(null);
     // The GET queries a different url depending on whether the category is set to playlist
     const defaultUrl = `https://api.spotify.com/v1/search?q=${searchInput}&type=${category}`;
     const playlistUrl = `https://api.spotify.com/v1/browse/categories/${searchInput}/playlists`;
     let url = category === "playlist" ? playlistUrl : defaultUrl;
     try {
-      console.log("hello");
       const searchParams = {
         method: "GET",
         headers: {
@@ -53,7 +55,9 @@ const HomePage = () => {
         .then((response) => response.json())
         //There are multiple secondUrl and filterID values depending on which category the user searches
         .then((data) => {
-          console.log(data);
+          // setDesign separates the UX state from the category filter state
+          // Makes the search results render correctly if the user wants to change the category between searches
+          setDesign(category);
           if (category === "album") {
             filterID = data.albums.items[0].id;
             secondUrl = `https://api.spotify.com/v1/albums/${filterID}/tracks`;
@@ -64,7 +68,6 @@ const HomePage = () => {
             filterID = data.tracks.items[0].id;
             secondUrl = `https://api.spotify.com/v1/tracks/${filterID}/`;
           } else if (category === "playlist") {
-            console.log(data);
             return setResults(data.playlists.items); // make sure that's the object that you're looking for
           }
         })
@@ -95,6 +98,11 @@ const HomePage = () => {
     }
   };
 
+  function displayCurrentTrack(id) {
+    let currentTrack = results.find((track) => track.id === id);
+    setTrack(currentTrack);
+  }
+
   // render the HomePage component
   return (
     <div id="HomePage">
@@ -107,15 +115,14 @@ const HomePage = () => {
               <span className="text-green-500">spotify</span>searchapp.
             </h1>
             {/* paragraph */}
-            <p className="text-xl md:3xl mx-6">
+            <p className="text-xl md:3xl mx-6 mb-10">
               Pass the time with good vibes...
             </p>
           </div>
           {/* MusicPlayer */}
           <div>
             <WebPlayback
-              token="BQAbzobwlz4JyoAvmf9z421N0eBhrWtAKvokAg5fyjz46yb3wjVWcKkczNklwPkSY7sW9qZ_Qmsisc-dQcONDrsAuNb0WhEk0sH-V6pRxuNr-iY_wD172wkHoZ0oWoOI1IMtdnYfcgJcbMOp7LVevtfTmenKFfj9-e5yXulDZwZXPGnlnoJnil9RYdpum1hTF9CFj1krYn9Q19lP4tg
-
+              token="BQAtiLIHQKa39SiO6sc5kOPoLOWR05EU3rKMSqdmVlChvFts-o7IcMmXEURLm6atwvZHF0Ta1n8L6E-ZmAUrkDnt9lMHXPYk4Y9oFBnAu-I3u6IvvBXja9lTEtzBiGMLQ4P4MIwktigXGyqgC0BKtrKWpx5IfkhuUIZWwS332HmPIkViFbkXUBgdpfd-zmWjYmoLSeg6seXdiGbSwh6uN47GBux39T-vqd-6cMvxLYlKPDmXX2dI-hPsegIdeUoPiL1fMKNRccBasxAhbtsF-w60INGIjKx_IXoYtaSRuoZLUmI3COcMBtxDqNXEjtWmT9bBPDFb-PH58Q
 "
             />
           </div>
@@ -134,7 +141,11 @@ const HomePage = () => {
           {/* CardGrid */}
           {results && (
             <div className="my-10 mx-12">
-              <CardGrid results={results} category={category} />
+              <CardGrid
+                results={results}
+                category={design}
+                displayCurrentTrack={displayCurrentTrack}
+              />
             </div>
           )}
 

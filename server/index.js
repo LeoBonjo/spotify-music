@@ -30,7 +30,7 @@ app.get("/auth/login", (req, res) => {
               user-read-email \
               user-read-private";
   var state = generateRandomString(16);
-  console.log("WE ARE BEFORE");
+
   var auth_query_parameters = new URLSearchParams({
     response_type: "code",
     client_id: spotify_client_id,
@@ -76,7 +76,6 @@ app.get("/auth/callback", (req, res) => {
 });
 
 app.get("/auth/token", (req, res) => {
-  console.log("hi there");
   res.send({ access_token: access_token });
 });
 

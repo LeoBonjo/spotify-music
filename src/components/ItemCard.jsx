@@ -1,9 +1,10 @@
 const ItemCard = ({ result, category }) => {
+  console.log("CATEGORY", category);
   const renderPTag = () => {
     if (category === "playlist") {
-      return result.description;
+      return result?.description;
     } else if (category === "artist" || "album") {
-      return result.artists[0].name;
+      return result?.artists[0].name;
     }
   };
 

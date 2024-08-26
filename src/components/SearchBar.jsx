@@ -9,6 +9,12 @@ const SearchBar = ({
   setCategory,
   searchFieldFilter,
 }) => {
+  const handleChangeCategory = (e) => {
+    console.log(e.target.value);
+    setCategory(e.target.value);
+    setSearchInput("");
+  };
+
   return (
     <div id="SearchBar">
       {/* // container for the search bar with styling */}
@@ -20,7 +26,7 @@ const SearchBar = ({
           name="filters-dropdown"
           id="filters-dropdown"
           className="flex items-center justify-center p-2"
-          onChange={(e) => setCategory(e.target.value)}
+          onChange={handleChangeCategory}
         >
           <option value="">Filter</option>
           <option value="artist">Artist</option>
@@ -34,7 +40,7 @@ const SearchBar = ({
           // input type is text
           type="text"
           // placeholder text in the input field
-          placeholder="What do you want to hear?"
+          placeholder="What do you want to find?"
           // set the input field value from the searchInput prop
           value={searchInput}
           // update searchInput state when input changes

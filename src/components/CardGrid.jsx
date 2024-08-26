@@ -1,12 +1,19 @@
+import { Link } from "react-router-dom";
 import ItemCard from "./ItemCard";
 import TrackCard from "./TrackCard";
 
-const CardGrid = ({ results, category }) => {
-  console.log(results);
+const CardGrid = ({ results, category, displayCurrentTrack }) => {
   const showCard = () => {
     if (category === "track") {
-      return <TrackCard key={results.id} results={results} />;
+      return (
+        <TrackCard
+          key={results.id}
+          results={results}
+          displayCurrentTrack={displayCurrentTrack}
+        />
+      );
     } else if (category === "playlist" || "artist" || "album") {
+      console.log(results);
       return results.map((result) => (
         <ItemCard key={result.id} result={result} category={category} />
       ));

@@ -8,7 +8,7 @@ const track = {
   artists: [{ name: "" }],
 };
 
-function WebPlayback(props) {
+function WebPlayback({ token }) {
   const [player, setPlayer] = useState(undefined);
   const [is_paused, setPaused] = useState(false);
   const [is_active, setActive] = useState(false);
@@ -20,12 +20,11 @@ function WebPlayback(props) {
     script.async = true;
 
     document.body.appendChild(script);
-
     window.onSpotifyWebPlaybackSDKReady = () => {
       const player = new window.Spotify.Player({
         name: "Web Playback SDK",
         getOAuthToken: (cb) => {
-          cb(props.token);
+          cb(token);
         },
         volume: 0.5,
       });
@@ -45,8 +44,10 @@ function WebPlayback(props) {
           return;
         }
 
-        setTrack(state.track_window.current_track);
-        setPaused(state.paused);
+        // setTrack(state.track_window.current_track);
+        // setPaused(state.paused);
+
+        // setTrack(current_track);
 
         player.getCurrentState().then((state) => {
           !state ? setActive(false) : setActive(true);
@@ -60,11 +61,43 @@ function WebPlayback(props) {
   if (!is_active) {
     return (
       <>
+        <h2 className="font-bold text-xl mt-8 justify-center flex">
+          FEATURED SELECTIONS
+        </h2>
         <div className="container">
           <div className="main-wrapper">
             <b>
-              {" "}
-              Instance not active. Transfer your playback using your Spotify app{" "}
+              <iframe
+                // style="border-radius:12px"
+                src="https://open.spotify.com/embed/artist/5a2EaR3hamoenG9rDuVn8j?utm_source=generator"
+                width="100%"
+                height="352"
+                frameBorder="0"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+              ></iframe>
+            </b>
+            <b>
+              <iframe
+                // style="border-radius:12px"
+                src="https://open.spotify.com/embed/album/4z6F5s3RVaOsekuaegbLfD?utm_source=generator"
+                width="100%"
+                height="352"
+                frameBorder="0"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+              ></iframe>
+            </b>
+            <b>
+              <iframe
+                // style="border-radius:12px"
+                src="https://open.spotify.com/embed/track/3k6L0H08zSY5yRDgqI8fqx?utm_source=generator"
+                width="100%"
+                height="352"
+                frameBorder="0"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+              ></iframe>
             </b>
           </div>
         </div>
@@ -73,6 +106,9 @@ function WebPlayback(props) {
   } else {
     return (
       <>
+        <h2 className="font-bold text-xl mt-8 justify-center flex">
+          NOW PLAYING
+        </h2>
         <div className="container">
           <div className="main-wrapper">
             <img
@@ -99,6 +135,7 @@ function WebPlayback(props) {
               <button
                 className="btn-spotify"
                 onClick={() => {
+                  // togglePlay should be coming from the imported player object but its not
                   player.togglePlay();
                 }}
               >

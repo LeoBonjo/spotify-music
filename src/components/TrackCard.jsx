@@ -1,21 +1,29 @@
-const TrackCard = ({ results, category }) => {
+import { Link } from "react-router-dom";
+
+const TrackCard = ({ results }) => {
   return (
     <div id="TrackCard">
       {/* container for each album card */}
-      <div
-        id="TrackCard"
-        className="bg-white border-2 border-black rounded-md overflow-hidden"
-      >
-        <div className="h-auto grid gap-4">
-          <img src={results.album.images[0].url} alt="" />
-        </div>
+      <Link to="/" onClick={() => displayCurrentTrack(results)}>
+        <div
+          id="TrackCard"
+          className="bg-white border-2 border-black rounded-md overflow-hidden"
+        >
+          {results && (
+            <>
+              <div className="h-auto grid gap-4">
+                <img src={results.album.images[0].url} alt="" />
+              </div>
 
-        <div className="p-4">
-          <h3 className="text-lg font-semibold mb-2">{results.name}</h3>
+              <div className="p-4">
+                <h3 className="text-lg font-semibold mb-2">{results.name}</h3>
 
-          <p className="text-md font-normal">{results.artists[0].name}</p>
+                <p className="text-md font-normal">{results.artists[0].name}</p>
+              </div>
+            </>
+          )}
         </div>
-      </div>
+      </Link>
     </div>
   );
 };
