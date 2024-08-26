@@ -25,9 +25,12 @@ var generateRandomString = function (length) {
 var app = express();
 
 app.get("/auth/login", (req, res) => {
-  var scope = "streaming user-read-email user-read-private";
+  var scope =
+    "streaming \
+              user-read-email \
+              user-read-private";
   var state = generateRandomString(16);
-
+  console.log("WE ARE BEFORE");
   var auth_query_parameters = new URLSearchParams({
     response_type: "code",
     client_id: spotify_client_id,
@@ -44,7 +47,7 @@ app.get("/auth/login", (req, res) => {
 
 app.get("/auth/callback", (req, res) => {
   var code = req.query.code;
-
+  console.log("WE ARE HERE", req.query);
   var authOptions = {
     url: "https://accounts.spotify.com/api/token",
     form: {
@@ -64,6 +67,7 @@ app.get("/auth/callback", (req, res) => {
   };
 
   request.post(authOptions, function (error, response, body) {
+    console.log("are we here??");
     if (!error && response.statusCode === 200) {
       access_token = body.access_token;
       res.redirect("/");
@@ -72,7 +76,8 @@ app.get("/auth/callback", (req, res) => {
 });
 
 app.get("/auth/token", (req, res) => {
-  res.json({ access_token: access_token });
+  console.log("hi there");
+  res.send({ access_token: access_token });
 });
 
 app.listen(port, () => {

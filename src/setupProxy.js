@@ -1,7 +1,7 @@
-module.exports = function (app) {
-  app.use(
-    proxy(`/auth/**`, {
-      target: "http://localhost:5000",
-    })
-  );
-};
+// module.exports = function (app) {
+//   app.use(
+//     proxy(`/auth/**`, {
+//       target: "http://localhost:4000",
+//     })
+//   );
+// };

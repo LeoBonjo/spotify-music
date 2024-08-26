@@ -1,3 +1,6 @@
+import React, { useState, useEffect } from "react";
+import WebPlayback from "./components/WebPlayback";
+import Login from "./components/Login";
 import { Routes, Route, Outlet } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import HomePage from "./pages/HomePage";
@@ -21,14 +24,40 @@ const Layout = () => {
 };
 
 const App = () => {
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    console.log("hello");
+    async function getToken() {
+      const response = await fetch("/auth/token");
+      console.log(response);
+      const json = await response.json();
+      console.log(json);
+      setToken(json.access_token);
+      console.log(json.access_token);
+    }
+
+    //getToken();
+  }, []);
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<HomePage />} />
-        <Route path="about" element={<AboutPage />} />
-        <Route path="docs" element={<DocsPage />} />
-      </Route>
-    </Routes>
+    <>
+      <WebPlayback
+        token="BQCEqVzYH2gGuE7iPWYHWVfpl828Iz2Hkbwm3fe9VUHghRal01DG8GIhlZILmVIN3AYReyAIr81ULsCJjB4AAUc0M8A2NM3C-4mXmCuFTitXiblerhkdmfdjcg1L-xlx_-PHVUb5zUB3sCBmMkMd0LyBNjLa98vdPgiEXNDDSMnGmNWvYnb831o0vtvEV--yyioaxZdMdhugZSONkaE
+"
+      />
+    </>
+    // <>{token === "" ? <Login /> : <WebPlayback token={token} />}</>
+    // <Routes>
+    //   {/* Replaced <Layout/> with the token stuff in the first Route tag */}
+    //   <Route
+    //     path="/"
+    //     element={token === "" ? <Login /> : <WebPlayback token={token} />}
+    //   >
+    //     <Route path="/home" element={<HomePage />} />
+    //     <Route path="about" element={<AboutPage />} />
+    //     <Route path="docs" element={<DocsPage />} />
+    //   </Route>
+    // </Routes>
   );
 };
 
