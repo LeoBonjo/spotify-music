@@ -20,19 +20,19 @@ const FeaturedSection = ({ category, featured }) => {
         <img
           src={featured.images[0].url}
           alt={featured.name}
-          className="w-auto max-h-80 flex justify-center ml-28 object-cover"
+          className="border w-auto max-h-80 flex justify-center ml-28 object-cover"
         />
       );
     } else if (category === "album") {
       return (
-        <i className="fa fa-music mx-auto mt-5 fa-4x" aria-hidden="true"></i>
+        <i className=" fa fa-music mx-auto mt-5 fa-4x" aria-hidden="true"></i>
       );
     } else if (category === "playlist") {
       return (
         <img
           src={featured.images[0].url}
           alt={featured.name}
-          className="w-auto max-h-80 flex justify-center ml-28 object-cover"
+          className="border w-auto max-h-80 flex justify-center ml-28 object-cover"
         />
       );
     } else if (category === "track") {
@@ -40,7 +40,7 @@ const FeaturedSection = ({ category, featured }) => {
         <img
           src={featured.album.images[0].url}
           alt={featured.name}
-          className="w-auto max-h-80 flex justify-center ml-28 object-cover"
+          className="border w-auto max-h-80 flex justify-center ml-28 object-cover"
         />
       );
     }
@@ -49,7 +49,7 @@ const FeaturedSection = ({ category, featured }) => {
   const displayFeatDescription = () => {
     if (category === "artist") {
       return (
-        <h4 className=" flex justify-center">{featured.artists[0].name}</h4>
+        <h4 className=" flex justify-center ">{featured.artists[0].name}</h4>
       );
     } else if (category === "album") {
       return (
@@ -115,7 +115,12 @@ const FeaturedSection = ({ category, featured }) => {
         <div className="container flex justify-center m-auto">
           {displayFeatImage()}
           <div className=" flex flex-col justify-center m-auto">
-            <h4 className="font-bold flex justify-center">{featured.name}</h4>
+            <h4
+              id="featured-container"
+              className="font-bold flex justify-center m-auto max-w-36"
+            >
+              {featured.name}
+            </h4>
             {displayFeatDescription()}
           </div>
         </div>
