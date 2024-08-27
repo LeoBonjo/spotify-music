@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import SearchBar from "../components/SearchBar";
 import CardGrid from "../components/CardGrid";
-import WebPlayback from "../components/WebPlayback";
+
+import Error from "../components/Error";
+import { useNavigate } from "react-router-dom";
+import FeaturedSection from "../components/FeaturedSection";
+
 // define the client ID and client secret for Spotify API access
 const CLIENT_ID = "0d51003d15da4d759730b49c86a4eb83";
 const CLIENT_SECRET = "721d7765301746ed9663b04375ae2c72";
@@ -12,8 +16,12 @@ const HomePage = () => {
   const [results, setResults] = useState(null);
   const [category, setCategory] = useState("");
   const [design, setDesign] = useState("");
+  const [error, setError] = useState(null);
+  const [featured, setFeatured] = useState(null);
 
-  // For the future, in the player, if there's an option to play the entire album or just the track
+  // How to navigate the user programmatically - make a 404 page
+  // Look at react router slides
+  // const navigate = useNavigate();
 
   useEffect(() => {
     const authParams = {
@@ -47,7 +55,7 @@ const HomePage = () => {
           Authorization: `Bearer ${accessToken}`,
         },
       };
-      //Initialize variables to hold (abstract) the filterID and secondUrl
+      // Initialize variables to abstract the filterID and secondUrl
       let filterID;
       let secondUrl;
       await fetch(url, searchParams)
@@ -58,6 +66,7 @@ const HomePage = () => {
           // setDesign separates the UX state from the category filter state
           // Makes the search results render correctly if the user wants to change the category between searches
           setDesign(category);
+          setError(null);
           if (category === "album") {
             filterID = data.albums.items[0].id;
             secondUrl = `https://api.spotify.com/v1/albums/${filterID}/tracks`;
@@ -68,24 +77,27 @@ const HomePage = () => {
             filterID = data.tracks.items[0].id;
             secondUrl = `https://api.spotify.com/v1/tracks/${filterID}/`;
           } else if (category === "playlist") {
-            return setResults(data.playlists.items); // make sure that's the object that you're looking for
+            setResults(data.playlists.items); // make sure that's the object that you're looking for
+            return;
           }
         })
         .catch((error) => {
           console.error("Error fetching that item:", error);
+          setError(true);
           return null;
         });
       if (!filterID) {
-        console.error("Sorry, nothing matches that search.");
-        return;
+        if (category !== "playlist") {
+          console.error("Sorry, nothing matches that search.");
+          setError(true);
+          return;
+        }
       }
-      console.log("HERE?");
       // pass secondUrl and searchParams as props to the fetch
       await fetch(secondUrl, searchParams)
         .then((response) => response.json())
-        // If category type is TRACK .then((data) => setResults(data))
-        // Else category type is .then((data) => setResults(data.items))
         .then((data) => {
+          setError(null);
           if (category === "track") {
             setResults(data);
           } else if (category === "artist" || "album" || "playlist") {
@@ -95,12 +107,19 @@ const HomePage = () => {
         .catch((error) => console.error("Error fetching request:", error));
     } catch (error) {
       console.error("Error in searchFieldFilter function:", error);
+      setError(true);
     }
   };
 
-  function displayCurrentTrack(id) {
-    let currentTrack = results.find((track) => track.id === id);
-    setTrack(currentTrack);
+  function displayFeaturedItem(id) {
+    //use the find method
+    console.log("hello??");
+    if (category === "track") {
+      setFeatured(results);
+    } else {
+      let featuredItem = results.find((result) => result.id === id);
+      setFeatured(featuredItem);
+    }
   }
 
   // render the HomePage component
@@ -121,10 +140,7 @@ const HomePage = () => {
           </div>
           {/* MusicPlayer */}
           <div>
-            <WebPlayback
-              token="BQAtiLIHQKa39SiO6sc5kOPoLOWR05EU3rKMSqdmVlChvFts-o7IcMmXEURLm6atwvZHF0Ta1n8L6E-ZmAUrkDnt9lMHXPYk4Y9oFBnAu-I3u6IvvBXja9lTEtzBiGMLQ4P4MIwktigXGyqgC0BKtrKWpx5IfkhuUIZWwS332HmPIkViFbkXUBgdpfd-zmWjYmoLSeg6seXdiGbSwh6uN47GBux39T-vqd-6cMvxLYlKPDmXX2dI-hPsegIdeUoPiL1fMKNRccBasxAhbtsF-w60INGIjKx_IXoYtaSRuoZLUmI3COcMBtxDqNXEjtWmT9bBPDFb-PH58Q
-"
-            />
+            <FeaturedSection category={category} featured={featured} />
           </div>
           {/* SearchBar */}
           <div className="my-5">
@@ -137,19 +153,19 @@ const HomePage = () => {
               setCategory={setCategory}
             />
           </div>
-
+          {error && <Error />}
           {/* CardGrid */}
           {results && (
             <div className="my-10 mx-12">
               <CardGrid
                 results={results}
                 category={design}
-                displayCurrentTrack={displayCurrentTrack}
+                displayFeaturedItem={(id) => displayFeaturedItem(id)}
               />
             </div>
           )}
 
-          <p className="text:sm md:text-base mb-10 text-center">
+          <p className="text:sm md:text-base my-16 text-center">
             CodeOp Full-Stack Web Development
             <br />
             MVP Project 2024

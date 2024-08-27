@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import WebPlayback from "./components/WebPlayback";
-import Login from "./components/Login";
 import { Routes, Route, Outlet } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import DocsPage from "./pages/DocsPage";
+import ErrorPage from "./components/Error";
 
 // Layout component that includes shared UI elements
 const Layout = () => {
@@ -29,29 +28,26 @@ const App = () => {
   );
 
   useEffect(() => {
-    console.log("hello");
     async function getToken() {
       const response = await fetch("/auth/token");
-      console.log(response);
+
       const json = await response.json();
-      console.log(json);
+
       setToken(json.access_token);
-      console.log(json.access_token);
     }
 
     getToken();
   }, []);
   return (
     <Routes>
-      {/* Replaced <Layout/> with the token stuff in the first Route tag */}
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
         <Route path="about" element={<AboutPage />} />
         <Route path="docs" element={<DocsPage />} />
+        {/* <Route path="error" element={<ErrorPage />} /> */}
       </Route>
     </Routes>
   );
 };
 
-// export the App component so it can be used in other files
 export default App;

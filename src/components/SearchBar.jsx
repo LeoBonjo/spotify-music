@@ -10,8 +10,12 @@ const SearchBar = ({
   searchFieldFilter,
 }) => {
   const handleChangeCategory = (e) => {
-    console.log(e.target.value);
     setCategory(e.target.value);
+    setSearchInput("");
+  };
+
+  const handleSubmitSearch = (e) => {
+    searchFieldFilter(e);
     setSearchInput("");
   };
 
@@ -27,6 +31,7 @@ const SearchBar = ({
           id="filters-dropdown"
           className="flex items-center justify-center p-2"
           onChange={handleChangeCategory}
+          required="required"
         >
           <option value="">Filter</option>
           <option value="artist">Artist</option>
@@ -48,7 +53,6 @@ const SearchBar = ({
           onKeyPress={(e) => {
             // check if the Enter key is pressed
             if (e.key === "Enter") {
-              // call searchArtist function when Enter is pressed
               (e) => searchFieldFilter(e);
             }
           }}
@@ -56,7 +60,7 @@ const SearchBar = ({
           className="p-3 ml-2 mr-2 w-full"
         />
         {/* because it's a FORM element, you have to pass the event as an argument and preventDefault in the function */}
-        <button type="submit" onClick={(e) => searchFieldFilter(e)}>
+        <button type="submit" onClick={handleSubmitSearch}>
           <i className="fas fa-search text-black text-2xl mr-5"></i>
         </button>
       </form>

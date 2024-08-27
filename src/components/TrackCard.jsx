@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 
-const TrackCard = ({ results }) => {
+const TrackCard = ({ results, displayFeaturedItem }) => {
   return (
     <div id="TrackCard">
       {/* container for each album card */}
-      <Link to="/" onClick={() => displayCurrentTrack(results)}>
+      <Link to="/">
         <div
           id="TrackCard"
           className="bg-white border-2 border-black rounded-md overflow-hidden"
+          onClick={() => displayFeaturedItem(results.id)}
         >
           {results && (
             <>
