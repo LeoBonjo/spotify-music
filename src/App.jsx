@@ -24,7 +24,7 @@ const Layout = () => {
 
 const App = () => {
   const [token, setToken] = useState(
-    "BQAtiLIHQKa39SiO6sc5kOPoLOWR05EU3rKMSqdmVlChvFts-o7IcMmXEURLm6atwvZHF0Ta1n8L6E-ZmAUrkDnt9lMHXPYk4Y9oFBnAu-I3u6IvvBXja9lTEtzBiGMLQ4P4MIwktigXGyqgC0BKtrKWpx5IfkhuUIZWwS332HmPIkViFbkXUBgdpfd-zmWjYmoLSeg6seXdiGbSwh6uN47GBux39T-vqd-6cMvxLYlKPDmXX2dI-hPsegIdeUoPiL1fMKNRccBasxAhbtsF-w60INGIjKx_IXoYtaSRuoZLUmI3COcMBtxDqNXEjtWmT9bBPDFb-PH58Q"
+    "BQCj2UcMkXhSnP6PPxzMWwBNHOn0uQAsm6YDYE9ZqJMrRQQS_KDfBlxmrOksiCEw9tfvo-gtxzw1HniYI8lO04eR5Z3SUQCV5IF6NQxfeglXI_G4MGS0iWP3ENP7scnq28GAkPnZ3zlxfYUU00jJiDTFC4Px2e4toRXwcgs3kRpMAFS3R_vH8hBM9vK9v3F82r9aCTe9KwGZ3hoaYWA"
   );
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index element={<HomePage />} />
+        <Route index element={<HomePage token={token} />} />
         <Route path="about" element={<AboutPage />} />
         <Route path="docs" element={<DocsPage />} />
         {/* <Route path="error" element={<ErrorPage />} /> */}

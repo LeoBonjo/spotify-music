@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 import SearchBar from "../components/SearchBar";
 import CardGrid from "../components/CardGrid";
-
 import Error from "../components/Error";
 import { useNavigate } from "react-router-dom";
 import FeaturedSection from "../components/FeaturedSection";
+import WebPlayback from "../components/WebPlayback";
 
 // define the client ID and client secret for Spotify API access
 const CLIENT_ID = "0d51003d15da4d759730b49c86a4eb83";
 const CLIENT_SECRET = "721d7765301746ed9663b04375ae2c72";
 
-const HomePage = () => {
+const HomePage = ({ token }) => {
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [results, setResults] = useState(null);
@@ -128,7 +128,7 @@ const HomePage = () => {
       <section className="min-h-screen">
         <div className="mt-20 my-auto">
           {/* banner */}
-          <div className="text-center">
+          <div className="text-center " id="header">
             {/* heading */}
             <h1 className="text-3xl md:text-5xl text-center text-black font-extrabold my-3">
               <span className="text-green-500">spotify</span>searchapp.
@@ -164,7 +164,9 @@ const HomePage = () => {
               />
             </div>
           )}
-
+          <div id="now-playing">
+            <WebPlayback token={token} results={results} />
+          </div>
           <p className="text:sm md:text-base my-16 text-center">
             CodeOp Full-Stack Web Development
             <br />

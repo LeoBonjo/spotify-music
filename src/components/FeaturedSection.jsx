@@ -74,8 +74,7 @@ const FeaturedSection = ({ category, featured }) => {
           <div className="main-wrapper">
             <b>
               <iframe
-                // style="border-radius:12px"
-                src="https://open.spotify.com/embed/artist/5a2EaR3hamoenG9rDuVn8j?utm_source=generator"
+                src="https://open.spotify.com/embed/playlist/37i9dQZF1DX09NvEVpeM77?utm_source=generator&theme=0"
                 width="100%"
                 height="352"
                 frameBorder="0"
@@ -85,8 +84,7 @@ const FeaturedSection = ({ category, featured }) => {
             </b>
             <b>
               <iframe
-                // style="border-radius:12px"
-                src="https://open.spotify.com/embed/album/4z6F5s3RVaOsekuaegbLfD?utm_source=generator"
+                src="https://open.spotify.com/embed/album/5XGRiFmZOsCy6ZqRFG5d6t?utm_source=generator"
                 width="100%"
                 height="352"
                 frameBorder="0"
@@ -96,8 +94,7 @@ const FeaturedSection = ({ category, featured }) => {
             </b>
             <b>
               <iframe
-                // style="border-radius:12px"
-                src="https://open.spotify.com/embed/track/3k6L0H08zSY5yRDgqI8fqx?utm_source=generator"
+                src="https://open.spotify.com/embed/track/0gatssZ0J7pMAlvFCGZZGH?utm_source=generator&theme=0"
                 width="100%"
                 height="352"
                 frameBorder="0"

@@ -65,6 +65,12 @@ body {
   position: absolute;
 }
 
+#header {
+  background-color: #d6ffe7;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
 .main-wrapper {
   padding-top: 45px;
   align-items: center;
@@ -76,6 +82,13 @@ body {
   position: relative;
   width: 80%;
   z-index: 1;
+}
+
+.main-wrapper.music-player {
+  margin-top: 10px;
+  background-color: #d6ffe7;
+  padding-bottom: 50px;
+  width: 100%;
 }
 
 .container {
@@ -95,7 +108,7 @@ b {
 }
 
 .now-playing__name {
-  font-size: 1.5em;
+  font-size: 1.25em;
   margin-bottom: 0.2em;
 }
 
@@ -110,10 +123,10 @@ b {
 .now-playing__cover {
   border-radius: 8px;
   float: left;
-  margin-right: 10px;
+  margin-right: 40px;
   text-align: right;
-  width: 300px;
-  height: 300px;
+  width: 175px;
+  height: 175px;
 }
 
 .now-playing__side {
@@ -131,7 +144,7 @@ b {
   color: #ffffff;
   font-family: Arial;
   font-size: 17px;
-  padding: 16px 31px;
+  padding: 10px 31px;
   margin-left: 5px;
   margin-right: 5px;
   text-decoration: none;
