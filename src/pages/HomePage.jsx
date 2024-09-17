@@ -170,15 +170,15 @@ const HomePage = ({ token }) => {
           <p className="text:sm md:text-base my-16 text-center">
             CodeOp Full-Stack Web Development
             <br />
-            MVP Project 2024
+            Spotify Music Search App
             <br />
             <a
-              href="https://github.com/w-sihara/fsd-mvp-w-sihara"
+              href="https://github.com/LeoBonjo"
               className="text-blue-500 hover:underline ml-1"
               target="_blank"
               rel="noopener noreferrer"
             >
-              fsd-mvp-w-sihara
+              Leo Bonjo GitHub
             </a>
           </p>
         </div>
