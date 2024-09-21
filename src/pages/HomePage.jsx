@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import SearchBar from "../components/SearchBar";
 import CardGrid from "../components/CardGrid";
 import Error from "../components/Error";
-import { useNavigate } from "react-router-dom";
 import FeaturedSection from "../components/FeaturedSection";
 import WebPlayback from "../components/WebPlayback";
 
