@@ -1,12 +1,13 @@
-# fsd-mvp-w-sihara
+# Spotify Music App
 
-Welcome to the spotifysearchapp! This full-stack application allows users to search for artists and view their albums using the Spotify Web API.
+Welcome to the spotifysearchapp! This full-stack application allows users to search for artists, albums, playlists, and tracks while streaming music to the app from a Spotify Premium Account all in one place!
 
-![fsd-mvp-w-sihara Project Screenshot](https://github.com/w-sihara/fsd-mvp-w-sihara/blob/main/src/assets/images/fsd-mvp-w-sihara-project-screenshot.png)
+<img width="802" alt="Screenshot 2024-09-17 at 4 42 22 AM" src="https://github.com/user-attachments/assets/35dd6db2-46f8-4a39-b993-3845804a0994">
+
 
 ## Project Overview
 
-The Spotify Search App is designed to provide a user-friendly interface for discovering albums from your favourite artists. Built with React, TailwindCSS, and the Spotify Web API, this app allows users to search for artists and explore their discography.
+The Spotify Search App is designed to provide a user-friendly interface for discovering albums, playlists, tracks, and your favourite artists. Built with React, TailwindCSS, and the Spotify Web API, this app allows users to search for artists and explore their discography.
 
 ## Installation
 
@@ -21,8 +22,10 @@ Once the project is running, you can use the search bar on the home page to find
 
 ## Key Features
 
-- **Search for Artists:** Find artists by typing their name into the search bar.
-- **View Albums:** Browse through the albums of the searched artist.
+- **Music WebPlayer:** Queue up tracks on your Spotify Premium account and stream them through the app.
+- **Filtered Search Bar:** Find artists, albums, tracks or playlists by typing into the search bar.
+- **Embedded Picks:** Embedded playlists, albums, and artists populate the homepage upon loading the app.
+- **Featured Item:** Click on any item returned by the Search Bar and replace Embedded Picks with info about your selection.
 - **Responsive Design:** The application is optimized for various screen sizes.
 - **Real-time Data:** Fetches artist and album information from the Spotify Web API.
 
@@ -56,8 +59,9 @@ The project is built with a component-based architecture using React. The main c
 
 - **NavBar:** Provides navigation across different pages.
 - **SearchBar:** Allows users to search for artists.
-- **CardGrid:** Displays albums in a grid layout.
-- **ItemCard:** Represents individual album cards.
+- **CardGrid:** Displays items in a grid layout.
+- **ItemCard:** Represents individual album or playlist cards.
+- **TrackCard:** Represents individual tracks.
 
 ### Folder Structure
 
@@ -70,9 +74,7 @@ The project is built with a component-based architecture using React. The main c
 
 ## Future Enhancements
 
-- **Expand Search Capabilities:** Include more detailed search filters.
-- **Improve UI/UX:** Refine the design and user experience.
+- **auth/auth login:** Allow users to login and save favorite selections.
+- **API Webplayback token** Incorporate webplayer token in useEffect hook (replace hardcoded).
 
-___
 
-_CodeOp Full-Stack Web Development MVP Project 2024_
